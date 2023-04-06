@@ -1,10 +1,11 @@
 # Project of Data Visualization (COM-480)
 
-| Student's name | SCIPER |
-| -------------- | ------ |
-| | |
-| | |
-| | |
+| Student's name                | SCIPER  |
+|-------------------------------|---------|
+| Herlihy Anna Patricia         | 323184  |
+| Nicholson Hamish Mcniece Hill | 335660  |
+| Zapridou Eleni                | 317306  |
+ | Kothari Yugesh Ajit           | 324948  | 
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
