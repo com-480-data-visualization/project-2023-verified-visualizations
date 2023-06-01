@@ -65,8 +65,8 @@ export default class GeoJSONComponent extends React.Component {
       name: this.props.fieldName,
       values: rows
     }
-    const width = 1000;//this.myInput.current.offsetWidth;
-    const height = width / 1.618; // = golden ratio
+    const width = window.screen.width * 0.8; //1000;//this.myInput.current.offsetWidth;
+    const height = window.screen.height/2; //1.618; // = golden ratio
     if (this.state.data.length === 0)
       return (
         <div>NO DATA YET</div>

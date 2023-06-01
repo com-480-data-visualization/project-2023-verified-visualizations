@@ -50,11 +50,8 @@ export default class ExampleAggChartComponent extends React.Component {
     console.log("state data=", this.state.data)
     return (
       <div className="container">
-        <h1>
-          <span>{`D3 Example Chart, for ${this.props.fieldName}`}</span>
-        </h1>
+
         <section>
-          <h2>Bar chart</h2>
           <BarChart data={this.state.data} />
         </section>
       </div>
