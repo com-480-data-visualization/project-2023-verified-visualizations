@@ -17,7 +17,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
     <!-- Core UI -->
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
@@ -72,10 +71,41 @@
 
           <img alt="" src="assets/brand/citibike-explorer_logo.png" width="132" height="46"/>
 
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-info dropdown-toggle" data-coreui-toggle="dropdown" aria-expanded="false">
+                Help
+            </button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">Available tools </li>
+              <li><hr class="dropdown-divider"></li>
+              <li class="dropdown-item"> <img alt="" class="icon me-2" src="assets/my-icons/poligon.png"/>
+                 Select a poligon area</li>
+              <li class="dropdown-item"> <img alt="" class="icon me-2" src="assets/my-icons/circle.png"/>
+                Select a circular area</li>
+              <li class="dropdown-item"> <img alt="" class="icon me-2" src="assets/my-icons/edit.png"/>
+                Edit your selected areas</li>
+              <li class="dropdown-item"> <img alt="" class="icon me-2" src="assets/my-icons/bin.png"/>
+                Delete your selected areas</li>
+            </ul>
+          </div>
+
+
+
         </div>
       </header>
       <div id="root"></div>
     </div>
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="vendors/simplebar/js/simplebar.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="vendors/chart.js/js/chart.min.js"></script>
+    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    </script>
 
 
     <!--

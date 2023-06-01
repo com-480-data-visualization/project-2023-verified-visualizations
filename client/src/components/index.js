@@ -31,8 +31,18 @@ export default class TopComponent extends React.Component {
       <div>
         <div style={{margin: 20}}>
 
-          <h1> Welcome to City Bike Explorer! </h1>
-          <h2> Select on the map the area you want to explore. The plots will be automatically updated to provide insights for the selected area! </h2>
+          <h1 style={{textAlign: "center"}}> Welcome to City Bike Explorer </h1>
+          <h3 style={{textAlign: "center"}}>
+            The perfect place for cycling and data enthusiasts
+          </h3>
+
+          <div style={{textAlign: "center"}}>
+            Bike usage patterns and trends change based on the time of the year or day, the region and even the age of the cyclists!
+            Whether you're a commuter looking to optimize your bike route, a city planner interested in improving bike infrastructure,
+            or a data analyst curious about bike sharing, our platform is here to empower you with the knowledge you seek.
+            Use the interactive map, to select an area you wish to explore. The plots will be automatically updated to provide insights for the selected area!
+
+          </div>
 
           <div className="body flex-grow-1 px-1">
             <div className="container-fluid">
