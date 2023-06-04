@@ -12,6 +12,7 @@ export default class TopComponent extends React.Component {
 
   constructor(props) {
     super(props);
+    this.topRef = React.createRef();
     this.state = { query: {} };
   }
 
@@ -63,7 +64,7 @@ export default class TopComponent extends React.Component {
           </div>
 
           <div className="row">
-            <div className = "col-4">
+            <div className = "col-4" id="chart-1">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -71,7 +72,7 @@ export default class TopComponent extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div>
                           <h4 className="card-title mb-0">Rides per hour</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="birth_year"/>
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="ridesHour" width={500} height={300} />
                         </div>
                       </div>
                     </div>
@@ -80,15 +81,15 @@ export default class TopComponent extends React.Component {
               </div>
             </div>
 
-            <div className = "col-4">
+            <div className = "col-4" id="chart-2">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
                     <div className="card-body">
                       <div className="d-flex justify-content-between">
                         <div>
-                          <h4 className="card-title mb-0">Popular stations</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="birth_year"/>
+                          <h4 className="card-title mb-0">Popular Starting Stations</h4>
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="topStartStations" width={500} height={300}/>
                         </div>
                       </div>
                     </div>
@@ -97,7 +98,24 @@ export default class TopComponent extends React.Component {
               </div>
             </div>
 
-            <div className = "col-4">
+            <div className = "col-4" id="chart-3">
+              <div className="body flex-grow-1 px-1">
+                <div className="container-fluid">
+                  <div className="card mb-4">
+                    <div className="card-body">
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <h4 className="card-title mb-0">Popular Ending Stations</h4>
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="topEndStations" width={500} height={300}/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className = "col-4">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -108,6 +126,21 @@ export default class TopComponent extends React.Component {
                           <ExampleAggChartComponent store={AggregatedDataStore} fieldName="birth_year"/>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+          </div>
+
+          <div className="body flex-grow-1 px-1" id="chart-4">
+            <div className="container-fluid">
+              <div className="card mb-4">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <div className="center">
+                    <h4 className="card-title mb-0">Rider demographics</h4>
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="birth_year" width={900} height={300}/>
                     </div>
                   </div>
                 </div>

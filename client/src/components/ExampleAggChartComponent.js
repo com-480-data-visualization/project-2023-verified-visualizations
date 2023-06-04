@@ -1,4 +1,5 @@
-import { BarChart } from "./d3/ExampleD3";
+import { BarChart } from "./d3/D3Chart";
+import ReactDOM from "react-dom";
 
 const React = require('react');
 const PropTypes = require('prop-types');
@@ -9,10 +10,19 @@ const PropTypes = require('prop-types');
 export default class ExampleAggChartComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { error: null, data: [] };
+    this.chartRef = React.createRef();;
+    this.state = { error: null, data: [], chartWidth: 0, chartHeight: 0};
   }
 
   componentDidMount() {
+    const cRef = this.chartRef.current;
+    this.setState({chartWidth: cRef.clientWidth, chartHeight: cRef.clientHeight});
+    const parentElement = ReactDOM.findDOMNode(this).parentNode;
+    const parentWidth = parentElement.offsetWidth;
+    const parentHeight = parentElement.offsetHeight;
+
+    console.log("parent components width " + parentWidth);
+    console.log("parent components height " + parentHeight);
     this.unsubscribeRefresh = this.props.store.listen(this.refresh.bind(this));
   }
 
@@ -21,8 +31,8 @@ export default class ExampleAggChartComponent extends React.Component {
   }
 
   refresh(error, data) {
-    console.log("raw data on refresh=", data)
-    this.setState({ error: error, data: data[this.props.fieldName] });
+    console.log("raw data on refresh=", data);
+    this.setState({ error: error, data: data[this.props.fieldName]});
   }
 
   /**
@@ -49,10 +59,9 @@ export default class ExampleAggChartComponent extends React.Component {
   renderGraph() {
     console.log("state data=", this.state.data)
     return (
-      <div className="container">
-
+      <div className="container" ref={this.chartRef}>
         <section>
-          <BarChart data={this.state.data} />
+          <BarChart data={this.state.data} chartWidth={this.state.chartWidth} chartHeight={this.state.chartHeight}/>
         </section>
       </div>
     );

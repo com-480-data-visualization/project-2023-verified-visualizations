@@ -41,14 +41,118 @@ const AggregatedDataStore = Reflux.createStore({
                 'value': 1
               }
             }
-          ]
+          ],
           // TODO: add more aggregations here. Will return a doc with $field: <aggregation>
           // output_field: [ { $<agg stage 1>: {...} }, {...} ]
+          'ridesHour' : [
+            {
+              '$addFields': {
+                'startHourOfDay': {
+                  '$hour': '$starttime'
+                }, 
+                'endHourOfDay': {
+                  '$hour': '$stoptime'
+                }, 
+                'durationHours': {
+                  '$divide': [
+                    {
+                      '$subtract': [
+                        '$stoptime', '$starttime'
+                      ]
+                    }, 3600000
+                  ]
+                }
+              }
+            }, {
+              '$addFields': {
+                'hoursOfDay': {
+                  '$range': [
+                    '$startHourOfDay', {
+                      '$trunc': {
+                        '$add': [
+                          '$startHourOfDay', '$durationHours'
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }, {
+              '$unwind': {
+                'path': '$hoursOfDay'
+              }
+            }, {
+              '$group': {
+                '_id': {
+                  '$mod': [
+                    '$hoursOfDay', 24
+                  ]
+                }, 
+                'count': {
+                  '$sum': 1
+                }
+              }
+            }, {
+              '$sort': {
+                '_id': 1
+              }
+            }, {
+              '$project': {
+                '_id': 0, 
+                'label': '$_id', 
+                'value': '$count'
+              }
+            }
+          ],
+          'topStartStations' : [
+            {
+              '$group': {
+                '_id': '$start_station_name', 
+                'count': {
+                  '$sum': 1
+                }
+              }
+            }, {
+              '$sort': {
+                'count': -1
+              }
+            }, {
+              '$limit': 5
+            }, {
+              '$project': {
+                '_id': 0, 
+                'label': '$_id', 
+                'value': '$count'
+              }
+            }
+          ],
+          'topEndStations' : [
+            {
+              '$group': {
+                '_id': '$end_station_name', 
+                'count': {
+                  '$sum': 1
+                }
+              }
+            }, {
+              '$sort': {
+                'count': -1
+              }
+            }, {
+              '$limit': 5
+            }, {
+              '$project': {
+                '_id': 0, 
+                'label': '$_id', 
+                'value': '$count'
+              }
+            }
+          ]
         }
       }
     ]
     const querystr = EJSON.stringify(pipeline)
-    console.log(`data store running new aggregation: ${querystr}`)
+    console.log(`real data store running new aggregation: ${querystr}`)
     fetch(`http://localhost:${cxninfo.port}/aggregate/${querystr}`).then(response => {
       const documents = response.json();
       documents.then(doc => {

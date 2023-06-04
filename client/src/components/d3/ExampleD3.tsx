@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   axisBottom,
   axisLeft,
@@ -11,6 +11,8 @@ import {
 
 interface BarChartProps {
   data: Array<any>;
+  chartWidth: number;
+  chartHeight: number;
 }
 
 interface AxisBottomProps {
@@ -34,7 +36,11 @@ function AxisBottom({ scale, transform }: AxisBottomProps) {
 
   useEffect(() => {
     if (ref.current) {
-      select(ref.current).call(axisBottom(scale));
+      const xAxis = axisBottom(scale)
+        .tickFormat((d: any) => d)
+        .tickSize(0);
+
+      select(ref.current).call(xAxis).selectAll("text").attr("transform", "rotate(-45)").style("text-anchor", "end");
     }
   }, [scale]);
 
@@ -70,10 +76,16 @@ function Bars({ data, height, scaleX, scaleY }: BarsProps) {
   );
 }
 
-export function BarChart({ data }: BarChartProps) {
-  const margin = { top: 10, right: 0, bottom: 20, left: 30 };
-  const width = 1000 - margin.left - margin.right;
-  const height = 500 - margin.top - margin.bottom;
+export function BarChart({ data, chartWidth, chartHeight }: BarChartProps) {
+  const margin = { top: 10, right: 0, bottom: 20, left: 40 };
+  
+  const chartRef = useRef<SVGGElement>(null);
+
+  const width = chartWidth - margin.left - margin.right;
+  const height = chartHeight - margin.top - margin.bottom;
+
+  // const width = 1000 - margin.left - margin.right;
+  // const height = 500 - margin.top - margin.bottom;
 
   const scaleX = scaleBand()
     .domain(data.map(({ label }) => label))
