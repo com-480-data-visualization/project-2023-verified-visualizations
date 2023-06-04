@@ -154,8 +154,8 @@ export default class TopComponent extends React.Component {
                 <div className="card-body">
                   <div className="d-flex justify-content-between">
                     <div>
-                      <h4 className="card-title mb-0">To be removed</h4>
-                      <div className="small text-medium-emphasis">once we finish the implementation </div>
+                      {/* <h4 className="card-title mb-0">To be removed</h4> */}
+                      {/* <div className="small text-medium-emphasis">once we finish the implementation </div> */}
                       <h1>{`Current Query: ${JSON.stringify(this.state.query)}`}</h1>
                       <QueryComponent/>
                     </div>
@@ -165,7 +165,7 @@ export default class TopComponent extends React.Component {
             </div>
           </div>
 
-          <div className="body flex-grow-1 px-4">
+          {/* <div className="body flex-grow-1 px-4">
             <div className="container-fluid">
               <div className="card mb-4">
                 <div className="card-body">
@@ -179,7 +179,7 @@ export default class TopComponent extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>
