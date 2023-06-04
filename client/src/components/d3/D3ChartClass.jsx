@@ -69,7 +69,7 @@ export const BarChart = ({ data }) => {
     const resizeChart = () => {
       const screenWidth = window.screen.width;
       const chartElement = chartRef.current;
-      const chartWidth = window.screen.width * 0.33;
+      const chartWidth = window.screen.width * 0.27;
       const chartHeight = window.screen.height/2;
       setChartWidth(chartWidth);
       setChartHeight(chartHeight);

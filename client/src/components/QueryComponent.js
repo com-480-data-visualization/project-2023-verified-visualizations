@@ -156,7 +156,7 @@ return (
       <h2>Date Selector</h2>
       <Row>
         <Col>
-          <Row>
+          <Row className="justify-content-center">
             <Col>
               <Calendar
                 value={this.state.selectedStartDate}
