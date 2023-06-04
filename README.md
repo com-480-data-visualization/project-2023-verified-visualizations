@@ -28,6 +28,11 @@
 
 **You can find our report for Milestone 3 in the milestone_3.pdf file.**
 
+Our screencast is [here](https://drive.google.com/file/d/1UCIhvUYI8ZOovydEuEQMZDglxtEy_dCO/view?usp=sharing)
+
+Our website is accessible while on campus / the EPFL VPN at 
+[http://128.178.52.6:33989](http://128.178.52.6:33989) 
+
 
 
 ## Late policy
