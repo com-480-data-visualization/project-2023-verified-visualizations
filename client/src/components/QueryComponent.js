@@ -1,4 +1,5 @@
 import {EJSON} from "bson";
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar } from "react-modern-calendar-datepicker";
@@ -20,7 +21,9 @@ export default class QueryComponent extends React.Component {
       selectedStartDate: { year: 2017, month: 1, day: 1 },
       selectedEndDate: { year: 2017, month: 1, day: 31 },
       startTime: "00:00",
-      endTime: "23:59"
+      endTime: "23:59",
+      // timeRange: { start: '00:00', end: '23:59' },
+      // timeRange: [0, 23],
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -48,6 +51,7 @@ export default class QueryComponent extends React.Component {
     const selectedEndDate = this.state.selectedEndDate;
     const startTime = this.state.startTime;
     const endTime = this.state.endTime;
+    // const timeRange = this.state.timeRange;
     // const selectedDates = this.state.selectedDates;
     // const dateList = selectedDates.map((date) => {
     //   const { year, month, day } = date;
@@ -64,12 +68,14 @@ export default class QueryComponent extends React.Component {
       selectedStartDate.day,
     );
     startDate.setHours(Number(startTime.split(":")[0]), Number(startTime.split(":")[1]));
+    // startDate.setHours(timeRange[0], 0, 0);
     const endDate = new Date(
       selectedEndDate.year,
       selectedEndDate.month,
       selectedEndDate.day,
     );
     endDate.setHours(Number(endTime.split(":")[0]), Number(endTime.split(":")[1]));
+    // endDate.setHours(timeRange[1], 59, 59);
 
     // Generate the MongoDB query based on the date range
     const q = {
@@ -105,6 +111,10 @@ export default class QueryComponent extends React.Component {
     this.setState({ endTime: e.target.value }, this.handleDateRangeSelect);
   };
 
+  // handleTimeRangeChange(timeRange) {
+  //   this.setState({ timeRange: timeRange }, this.handleDateRangeSelect);
+  // }
+
   handleChangeQuery(q) {
     this.setState({ query: q });
   }
@@ -138,48 +148,73 @@ export default class QueryComponent extends React.Component {
     event.preventDefault()
   }
   render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label> Select Period of Visualization</label>
-          <h2>Date Selector</h2>
-          <div style={{ display: "flex" }}>
-            <div>
-          <Calendar
-            value={this.state.selectedStartDate}
-            onChange={this.handleStartDateChange}
-            shouldHighlightWeekends
-          />
-          </div>
-          <div>
-          <Calendar
-            value={this.state.selectedEndDate}
-            onChange={this.handleEndDateChange}
-            shouldHighlightWeekends
-          />
-          </div>
-          </div>
-          <input
-            type="time"
-            value={this.state.startTime}
-            onChange={this.handleStartTimeChange}
-          />
-          <input
-            type="time"
-            value={this.state.endTime}
-            onChange={this.handleEndTimeChange}
-          />
-          {/* <label>
-            Example add to query via textbox:
-            <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
-          </label> */}
-          <input type="submit" value="Run Query"/>
-        </form>
-        <button onClick={this.handleClear.bind(this)}>Clear Query (need to manually clear map polygons)</button>
-      </div>
-    );
-  }
 
+return (
+  <div>
+    <Form onSubmit={this.handleSubmit}>
+      <Form.Label>Select Period of Visualization</Form.Label>
+      <h2>Date Selector</h2>
+      <Row>
+        <Col>
+          <Row>
+            <Col>
+              <Calendar
+                value={this.state.selectedStartDate}
+                onChange={this.handleStartDateChange}
+                shouldHighlightWeekends
+              />
+              <Form.Group>
+                <Form.Label>Start Time</Form.Label>
+                <Form.Control
+                  type="time"
+                  value={this.state.startTime}
+                  onChange={this.handleStartTimeChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Calendar
+                value={this.state.selectedEndDate}
+                onChange={this.handleEndDateChange}
+                shouldHighlightWeekends
+              />
+              <Form.Group>
+                <Form.Label>End Time</Form.Label>
+                <Form.Control
+                  type="time"
+                  value={this.state.endTime}
+                  onChange={this.handleEndTimeChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Col>
+        <Col>
+          <Row>
+            <Col>
+              <p>
+                To let users explore the dynamics of bike sharing in the city, we allow them to select the day of the month as well as the exact time. We give users this level of granularity because trends and statistics in bike sharing change quite dramatically based on the season and time of day. For example, summer months have increased rates, and by looking at times of the day, we can identify how many people may be using bikes to commute. We encourage users to explore such dynamics using the date and time selector and observing the graphs.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button variant="primary" type="submit">
+                Run Query
+              </Button>
+              <Button variant="secondary" onClick={this.handleClear.bind(this)}>
+                Clear Query (need to manually clear map polygons)
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Form>
+  </div>
+);
+    
+
+  }
 }
 
 QueryComponent.propTypes = {

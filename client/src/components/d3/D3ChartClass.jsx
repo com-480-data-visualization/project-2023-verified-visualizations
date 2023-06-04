@@ -13,7 +13,7 @@ export const BarChart = ({ data }) => {
     // Remove any existing chart before updating
     svg.selectAll("*").remove();
 
-    const margin = { top: 20, right: 20, bottom: 50, left: 40 };
+    const margin = { top: 20, right: 10, bottom: 50, left: 40 };
     const width = chartWidth - margin.left - margin.right;
     const height = chartHeight - margin.top - margin.bottom;
 
@@ -69,7 +69,7 @@ export const BarChart = ({ data }) => {
     const resizeChart = () => {
       const screenWidth = window.screen.width;
       const chartElement = chartRef.current;
-      const chartWidth = window.screen.width * 0.8;
+      const chartWidth = window.screen.width * 0.33;
       const chartHeight = window.screen.height/2;
       setChartWidth(chartWidth);
       setChartHeight(chartHeight);

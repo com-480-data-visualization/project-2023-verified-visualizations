@@ -82,7 +82,24 @@ export default class TopComponent extends React.Component {
             </div>
           </div>
 
-          <div className="body flex-grow-1 px-1">
+          <div className="body flex-grow-1 px-4">
+            <div className="container-fluid">
+              <div className="card mb-4">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      {/* <h4 className="card-title mb-0">To be removed</h4> */}
+                      {/* <div className="small text-medium-emphasis">once we finish the implementation </div> */}
+                      <h1>{`Current Query: ${JSON.stringify(this.state.query)}`}</h1>
+                      <QueryComponent/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="body flex-grow-1 px-1">
             <div className="container-fluid">
               <div className="card mb-4">
                 <div className="card-body">
@@ -95,17 +112,17 @@ export default class TopComponent extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="row">
-            {/* <div className = "col-4" id="chart-1">
+            <div className = "col-4" id="chart-1">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
                     <div className="card-body">
                       <div className="d-flex justify-content-between">
                         <div>
-                          <h4 className="card-title mb-0">Rides per hour</h4>
+                          <h4 className="card-title mb-0">Rides by hour-of-day breakdown</h4>
                           <ExampleAggChartComponent store={AggregatedDataStore} fieldName="ridesHour" width={this.state.containerWidth} height={this.state.containerHeight} />
                         </div>
                       </div>
@@ -113,9 +130,9 @@ export default class TopComponent extends React.Component {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
 
-            <div className = "col-6" id="chart-2">
+            <div className = "col-4" id="chart-2">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -132,7 +149,7 @@ export default class TopComponent extends React.Component {
               </div>
             </div>
 
-            <div className = "col-6" id="chart-3">
+            <div className = "col-4" id="chart-3">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -175,23 +192,6 @@ export default class TopComponent extends React.Component {
                     <div className="center">
                     <h4 className="card-title mb-0">Rider demographics</h4>
                           <AggChartFour store={AggregatedDataStore} fieldName="birth_year" width={this.state.containerWidth*3} height={this.state.containerHeight*3}/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="body flex-grow-1 px-4">
-            <div className="container-fluid">
-              <div className="card mb-4">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      {/* <h4 className="card-title mb-0">To be removed</h4> */}
-                      {/* <div className="small text-medium-emphasis">once we finish the implementation </div> */}
-                      <h1>{`Current Query: ${JSON.stringify(this.state.query)}`}</h1>
-                      <QueryComponent/>
                     </div>
                   </div>
                 </div>
