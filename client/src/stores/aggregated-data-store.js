@@ -34,7 +34,21 @@ const AggregatedDataStore = Reflux.createStore({
                   '$sum': 1
                 }
               }
-            }, {
+            },
+            { '$match': {
+              '$and' : [
+              {'value': { '$gt': 0 }},
+              {'_id': {'$ne': null}},
+              {'_id': {'$gt' : 1937}}
+          ]
+        }
+            }, 
+            {
+              '$sort': {
+                '_id': 1
+              }
+            },
+            {
               '$project': { // rename output to label + value, skip _id
                 '_id': 0,
                 'label': '$_id',

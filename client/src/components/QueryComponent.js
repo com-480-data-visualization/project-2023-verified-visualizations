@@ -1,6 +1,4 @@
 import {EJSON} from "bson";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar } from "react-modern-calendar-datepicker";
@@ -175,7 +173,7 @@ export default class QueryComponent extends React.Component {
             Example add to query via textbox:
             <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
           </label> */}
-          <input type="submit" value="Update"/>
+          <input type="submit" value="Run Query"/>
         </form>
         <button onClick={this.handleClear.bind(this)}>Clear Query (need to manually clear map polygons)</button>
       </div>

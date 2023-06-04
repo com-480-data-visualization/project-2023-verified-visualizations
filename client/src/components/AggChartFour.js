@@ -1,4 +1,4 @@
-import { BarChart } from "./d3/D3ChartClass";
+import { BarChart } from "./d3/D3ChartVerticalAxis";
 import ReactDOM from "react-dom";
 
 const React = require('react');
@@ -7,7 +7,7 @@ const PropTypes = require('prop-types');
 /**
  * Example component to render aggregated data.
  */
-export default class ExampleAggChartComponent extends React.Component {
+export default class AggChartFour extends React.Component {
   constructor(props) {
     super(props);
     this.chartRef = React.createRef();;
@@ -80,6 +80,6 @@ export default class ExampleAggChartComponent extends React.Component {
   }
 }
 
-ExampleAggChartComponent.propTypes = {
+AggChartFour.propTypes = {
   store: PropTypes.any.isRequired
 };

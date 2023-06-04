@@ -5,6 +5,8 @@ import SampledDataStore from '../stores/sampled-data-store'
 import QueryComponent from "./QueryComponent";
 import GeoJSONComponent from "./GeoJSONComponent";
 import ExampleAggChartComponent from './ExampleAggChartComponent'
+import AggChartFour from './AggChartFour'
+import AggChartThree from './AggChartThree'
 import PropTypes from "prop-types";
 import AggregatedDataStore from "../stores/aggregated-data-store";
 
@@ -13,16 +15,33 @@ export default class TopComponent extends React.Component {
   constructor(props) {
     super(props);
     this.topRef = React.createRef();
-    this.state = { query: {} };
+    this.state = { query: {}, 
+      containerWidth: 0,
+      containerHeight: 0
+    };
+    
   }
 
   componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
     this.unsubscribeRefresh = this.props.store.listen(this.refresh.bind(this));
   }
 
   componentWillUnmount() {
     this.unsubscribeRefresh();
+    window.removeEventListener('resize', this.handleResize);
   }
+
+  handleResize = () => {
+    const container = document.getElementById('chart-2');
+    if (container) {
+      this.setState({
+        containerWidth: container.offsetWidth,
+        containerHeight: container.offsetHeight
+      });
+    }
+  };
 
   refresh(state) {
     this.setState({ query: state.query });
@@ -63,8 +82,23 @@ export default class TopComponent extends React.Component {
             </div>
           </div>
 
+          <div className="body flex-grow-1 px-1">
+            <div className="container-fluid">
+              <div className="card mb-4">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <div className="center">
+                    <h4 className="card-title mb-0">Rides by hour-of-day breakdown</h4>
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="ridesHour" width={this.state.containerWidth} height={this.state.containerHeight} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="row">
-            <div className = "col-4" id="chart-1">
+            {/* <div className = "col-4" id="chart-1">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -72,16 +106,16 @@ export default class TopComponent extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div>
                           <h4 className="card-title mb-0">Rides per hour</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="ridesHour" width={500} height={300} />
+                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="ridesHour" width={this.state.containerWidth} height={this.state.containerHeight} />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className = "col-4" id="chart-2">
+            <div className = "col-6" id="chart-2">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -89,7 +123,7 @@ export default class TopComponent extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div>
                           <h4 className="card-title mb-0">Popular Starting Stations</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="topStartStations" width={500} height={300}/>
+                          <AggChartThree store={AggregatedDataStore} fieldName="topStartStations" width={this.state.containerWidth} height={this.state.containerHeight}/>
                         </div>
                       </div>
                     </div>
@@ -98,7 +132,7 @@ export default class TopComponent extends React.Component {
               </div>
             </div>
 
-            <div className = "col-4" id="chart-3">
+            <div className = "col-6" id="chart-3">
               <div className="body flex-grow-1 px-1">
                 <div className="container-fluid">
                   <div className="card mb-4">
@@ -106,7 +140,7 @@ export default class TopComponent extends React.Component {
                       <div className="d-flex justify-content-between">
                         <div>
                           <h4 className="card-title mb-0">Popular Ending Stations</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="topEndStations" width={500} height={300}/>
+                          <AggChartThree store={AggregatedDataStore} fieldName="topEndStations" width={this.state.containerWidth} height={this.state.containerHeight}/>
                         </div>
                       </div>
                     </div>
@@ -140,7 +174,7 @@ export default class TopComponent extends React.Component {
                   <div className="d-flex justify-content-between">
                     <div className="center">
                     <h4 className="card-title mb-0">Rider demographics</h4>
-                          <ExampleAggChartComponent store={AggregatedDataStore} fieldName="birth_year" width={900} height={300}/>
+                          <AggChartFour store={AggregatedDataStore} fieldName="birth_year" width={this.state.containerWidth*3} height={this.state.containerHeight*3}/>
                     </div>
                   </div>
                 </div>
