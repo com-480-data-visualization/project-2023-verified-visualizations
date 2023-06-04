@@ -18,10 +18,16 @@
 
 **10% of the final grade**
 
+**You can find our report for Milestone 2 in the milestone_2.pdf file.**
+
+
 
 ## Milestone 3 (4th June, 5pm)
 
 **80% of the final grade**
+
+**You can find our report for Milestone 3 in the milestone_3.pdf file.**
+
 
 
 ## Late policy
